@@ -64,10 +64,16 @@ $(DV_PATTERNS): verify-% : ./verilog/dv/%
                 sh -c $(VERIFY_COMMAND)
 				
 # Openlane Makefile Targets
-BLOCKS = $(shell cd openlane && find * -maxdepth 0 -type d)
-.PHONY: $(BLOCKS)
-$(BLOCKS): %:
-	export CARAVEL_ROOT=$(CARAVEL_ROOT) && cd openlane && $(MAKE) $*
+# BLOCKS = $(shell cd openlane && find * -maxdepth 0 -type d)
+# .PHONY: $(BLOCKS)
+# $(BLOCKS): %:
+# 	export CARAVEL_ROOT=$(CARAVEL_ROOT) && cd openlane && $(MAKE) $*
+
+user_proj_example:
+	cd user_proj_example && ./harden.sh
+
+user_project_wrapper:
+	./harden.sh
 
 # Install caravel
 .PHONY: install
